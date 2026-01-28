@@ -797,23 +797,72 @@
         </div>
     </footer>
 
-    <!-- Typewriter & Counter Script -->
+    <!-- Typewriter, Counter & Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- 1. Year Counter Animation ---
-            const counterEl = document.getElementById('year-counter');
-            const targetYears = 25;
-            let currentYears = 0;
-            const duration = 2000; // 2 seconds
-            const stepTime = Math.abs(Math.floor(duration / targetYears));
+            // --- 1. CELEBRATION (COUNT UP + CONFETTI) LOGIC ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when just 10% is visible
+            };
 
-            const timer = setInterval(() => {
-                currentYears += 1;
-                counterEl.innerText = currentYears;
-                if (currentYears == targetYears) {
-                    clearInterval(timer);
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCelebration();
+                        observer.unobserve(entry.target); // Run only once
+                    }
+                });
+            }, observerOptions);
+
+            const aboutSection = document.getElementById('about');
+            if(aboutSection) {
+                observer.observe(aboutSection);
+            }
+
+            function startCelebration() {
+                const counter = document.getElementById('year-counter');
+                let count = 0;
+                const target = 25;
+                const duration = 1500; // 1.5 seconds total duration
+                const intervalTime = duration / target;
+
+                const timer = setInterval(() => {
+                    count++;
+                    counter.innerText = count;
+                    if (count === target) {
+                        clearInterval(timer);
+                        fireConfetti();
+                    }
+                }, intervalTime);
+            }
+
+            function fireConfetti() {
+                // Get position of the counter to fire from roughly there
+                const rect = document.getElementById('year-counter').getBoundingClientRect();
+                // Normalize coordinates to 0-1 for canvas-confetti
+                const x = (rect.left + rect.width / 2) / window.innerWidth;
+                const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+                var count = 200;
+                var defaults = {
+                    origin: { x: x, y: y }
+                };
+
+                function fire(particleRatio, opts) {
+                    confetti(Object.assign({}, defaults, opts, {
+                        particleCount: Math.floor(count * particleRatio)
+                    }));
                 }
-            }, stepTime);
+
+                fire(0.25, { spread: 26, startVelocity: 55, });
+                fire(0.2, { spread: 60, });
+                fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+                fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+                fire(0.1, { spread: 120, startVelocity: 45, });
+            }
 
             // --- 2. Typewriter Logic (Static 1 & 2, Dynamic 3) ---
             const phrases = [
