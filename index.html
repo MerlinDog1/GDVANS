@@ -380,6 +380,61 @@
             background-position: center;
             border-radius: 8px 8px 0 0;
         }
+
+        /* --- Comparison Slider --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+            cursor: ew-resize;
+        }
+        .slider-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .slider-before {
+            z-index: 2;
+            width: 50%;
+            border-right: 3px solid var(--secondary);
+        }
+        .slider-after {
+            z-index: 1;
+        }
+        .slider-handle {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            left: 50%;
+            bottom: 0;
+            width: 4px;
+            margin-left: -2px;
+            background: var(--secondary);
+            pointer-events: none;
+        }
+        .slider-handle::after {
+            content: '↔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px;
+            height: 34px;
+            background: var(--secondary);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+        }
         .service-content { padding: 40px 30px; flex: 1; }
         .license-tag {
             background: #e8f5e9;
@@ -641,8 +696,11 @@
                 
                 <!-- Service 1 -->
                 <div class="service-card">
-                    <!-- Updated with uploaded filename -->
-                    <div class="service-img" style="background-image: url('1000016799.jpg');"></div>
+                    <div class="slider-container" id="clearanceSlider">
+                        <div class="slider-img slider-after" style="background-image: url('house-clearance-after-luton.png');"></div>
+                        <div class="slider-img slider-before" style="background-image: url('house-clearance-before-luton.jpg');"></div>
+                        <div class="slider-handle"></div>
+                    </div>
                     <div class="service-content">
                         <span class="license-tag">LICENSED DISPOSAL</span>
                         <h3>House Clearance</h3>
@@ -900,6 +958,28 @@
             }
 
             setTimeout(type, 1000);
+
+            // --- 3. Comparison Slider Logic ---
+            const slider = document.getElementById('clearanceSlider');
+            const beforeImg = slider.querySelector('.slider-before');
+            const handle = slider.querySelector('.slider-handle');
+
+            function moveSlider(e) {
+                const rect = slider.getBoundingClientRect();
+                const xPos = e.pageX || (e.touches && e.touches[0].pageX);
+                if (!xPos) return;
+                
+                let x = xPos - rect.left - window.scrollX;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                
+                const percent = (x / rect.width) * 100;
+                beforeImg.style.width = `${percent}%`;
+                handle.style.left = `${percent}%`;
+            }
+
+            slider.addEventListener('mousemove', moveSlider);
+            slider.addEventListener('touchmove', moveSlider);
         });
     </script>
 
