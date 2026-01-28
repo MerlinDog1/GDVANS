@@ -605,19 +605,19 @@
     <section id="about" class="section-padding" style="background: white;">
         <div class="container about-grid">
             <div class="about-img-box">
-                <!-- Using one of your provided photos -->
-                <img src="1000016803.jpg" alt="GDVANS Team">
+                <!-- Updated photo next to 25 years -->
+                <img src="unnamed (26).jpg" alt="GDVANS Team">
             </div>
             <div>
                 <h4 style="color: var(--secondary); margin-bottom: 10px;">ESTABLISHED 2001</h4>
+                <!-- Updated Counter Headline -->
+                <h2 class="about-intro-head"><span id="year-counter">0</span> Years of...</h2>
                 
-                <h2 class="about-intro-head">25 Years of...</h2>
-                
-                <!-- NEW 3-LINE TYPEWRITER CONTAINER -->
+                <!-- NEW TYPEWRITER CONTAINER (Static 1 & 2, Dynamic 3) -->
                 <div class="typewriter-container">
-                    <span id="line-1" class="type-line line-1"></span>
-                    <span id="line-2" class="type-line line-2"></span>
-                    <span id="line-3" class="type-line line-3"></span>
+                    <span class="type-line line-1">SERVING</span>
+                    <span class="type-line line-2">LUTON &</span>
+                    <span id="typewriter-text" class="type-line line-3"></span>
                 </div>
 
                 <p style="margin-top: 10px; font-size: 1.1rem; color: #555;">When you call GDVANS, you aren't getting a random driver from an app. You are getting a family-run business that has built a reputation in Bedfordshire for over two decades.</p>
@@ -797,106 +797,59 @@
         </div>
     </footer>
 
-    <!-- Typewriter Script -->
+    <!-- Typewriter & Counter Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const data = [
-                { l1: "KEEPING", l2: "LUTON", l3: "MOVING" },
-                { l1: "SERVING", l2: "DUNSTABLE", l3: "DAILY" },
-                { l1: "HELPING", l2: "BEDFORD", l3: "RELOCATE" },
-                { l1: "CLEARING", l2: "LEIGHTON BUZZARD", l3: "HOMES" },
-                { l1: "MOVING", l2: "BIGGLESWADE", l3: "FAMILIES" },
-                { l1: "WORKING IN", l2: "HOUGHTON REGIS", l3: "7 DAYS A WEEK" },
-                { l1: "COVERING", l2: "FLITWICK", l3: "AND AMPTHILL" },
-                { l1: "TRUSTED IN", l2: "SANDY", l3: "SINCE 2001" },
-                { l1: "YOUR LOCAL", l2: "SHEFFORD", l3: "MOVERS" },
-                { l1: "BASED NEAR", l2: "TODDINGTON", l3: "M1 CORRIDOR" }
+            // --- 1. Year Counter Animation ---
+            const counterEl = document.getElementById('year-counter');
+            const targetYears = 25;
+            let currentYears = 0;
+            const duration = 2000; // 2 seconds
+            const stepTime = Math.abs(Math.floor(duration / targetYears));
+
+            const timer = setInterval(() => {
+                currentYears += 1;
+                counterEl.innerText = currentYears;
+                if (currentYears == targetYears) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+
+            // --- 2. Typewriter Logic (Static 1 & 2, Dynamic 3) ---
+            const phrases = [
+                "MOVING", "DUNSTABLE", "BEDFORD", "RELOCATING", 
+                "THE M1 CORRIDOR", "HOUGHTON REGIS", "FLITWICK", 
+                "SANDY", "SHEFFORD", "TODDINGTON", "BIGGLESWADE"
             ];
             
-            const els = [
-                document.getElementById('line-1'),
-                document.getElementById('line-2'),
-                document.getElementById('line-3')
-            ];
-            
-            let dataIndex = 0; // Which object in data
-            let lineIndex = 0; // 0, 1, or 2 (which line we are typing)
-            let charIndex = 0; // Which char in the current line string
+            const typeTarget = document.getElementById('typewriter-text');
+            let phraseIndex = 0;
+            let charIndex = 0;
             let isDeleting = false;
-            let isWaiting = false;
 
             function type() {
-                const currentObj = data[dataIndex];
-                // Map lineIndex 0->l1, 1->l2, 2->l3
-                const key = lineIndex === 0 ? 'l1' : (lineIndex === 1 ? 'l2' : 'l3');
-                const textStr = currentObj[key];
-                
-                const currentEl = els[lineIndex];
+                const currentPhrase = phrases[phraseIndex];
 
                 if (isDeleting) {
-                    // DELETING LOGIC: Remove chars from line 3, then 2, then 1
-                    if (charIndex > 0) {
-                        currentEl.textContent = textStr.substring(0, charIndex - 1);
-                        charIndex--;
-                        setTimeout(type, 30); // Fast delete
-                    } else {
-                        // Finished deleting this line
-                        currentEl.innerHTML = ''; // Ensure clear
-                        if (lineIndex > 0) {
-                            // Move up to previous line
-                            lineIndex--;
-                            const prevKey = lineIndex === 0 ? 'l1' : 'l2';
-                            charIndex = currentObj[prevKey].length; // Start at end of prev line
-                            setTimeout(type, 30);
-                        } else {
-                            // All deleted. Move to next phrase.
-                            isDeleting = false;
-                            dataIndex = (dataIndex + 1) % data.length;
-                            lineIndex = 0;
-                            charIndex = 0;
-                            setTimeout(type, 500); // Pause before new typing
-                        }
-                    }
+                    typeTarget.innerHTML = currentPhrase.substring(0, charIndex - 1) + '<span class="cursor"></span>';
+                    charIndex--;
                 } else {
-                    // TYPING LOGIC: Type line 1, then 2, then 3
-                    if (charIndex < textStr.length) {
-                        // Add cursor only to active line
-                        currentEl.innerHTML = textStr.substring(0, charIndex + 1) + '<span class="cursor"></span>';
-                        // Remove cursor from previous line if exists
-                        if (lineIndex > 0) {
-                             els[lineIndex-1].innerHTML = data[dataIndex][lineIndex===1?'l1':'l2'];
-                        }
-                        
-                        charIndex++;
-                        setTimeout(type, 80); // Typing speed
-                    } else {
-                        // Finished this line
-                        // Remove cursor from this line (it will jump to next, or wait)
-                        currentEl.innerHTML = textStr; 
-                        
-                        if (lineIndex < 2) {
-                            // Move to next line
-                            lineIndex++;
-                            charIndex = 0;
-                            setTimeout(type, 200); // Pause between lines
-                        } else {
-                            // Finished all 3 lines
-                            // Add cursor back to end of last line to blink while waiting
-                            currentEl.innerHTML = textStr + '<span class="cursor"></span>';
-                            
-                            isWaiting = true;
-                            setTimeout(() => {
-                                isDeleting = true;
-                                isWaiting = false;
-                                charIndex = textStr.length; // Start deleting from end of line 3
-                                type();
-                            }, 1000); // Reduced pause to 1 second
-                        }
-                    }
+                    typeTarget.innerHTML = currentPhrase.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+                    charIndex++;
+                }
+
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(type, 1500); // Pause at end
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(type, 500); // Pause before next
+                } else {
+                    setTimeout(type, isDeleting ? 40 : 80);
                 }
             }
 
-            // Start
             setTimeout(type, 1000);
         });
     </script>
