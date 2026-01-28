@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GDVANS.COM - Licensed Upper Tier Waste Carrier (CBDU514958). Professional Man and Van in Luton. Open 7 days a week. WhatsApp us for a quote!">
+    <meta name="theme-color" content="#006400">
+    <title>GDVANS.COM | Licensed Waste Carrier | WhatsApp Us</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Structured Data (SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MovingCompany",
+          "@id": "https://gdvans.com/#organization",
+          "name": "GDVANS.COM",
+          "telephone": "07950 793026",
+          "url": "https://gdvans.com",
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=100063470771984",
+            "https://www.instagram.com/gdmanandvanluton"
+          ],
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "07:00",
+            "closes": "21:00"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Luton",
+            "addressRegion": "Bedfordshire",
+            "addressCountry": "GB"
+          },
+          "permit": "CBDU514958"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* --- 1. Branding Colors --- */
+        :root {
+            --primary: #006400; /* Deep Van Green */
+            --primary-dark: #004d00;
+            --secondary: #FFD700; /* Warning/Action Yellow */
+            --gold-text: #cfaf00; /* Darker Gold for text readability */
+            --whatsapp: #25D366; /* WhatsApp Green */
+            --white: #ffffff;
+            --off-white: #f9fdf9;
+            --text-dark: #333333;
+            --shadow: 0 10px 30px rgba(0, 100, 0, 0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden; /* Prevents side scrolling on mobile */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        a { text-decoration: none; transition: 0.3s; }
+        img { max-width: 100%; display: block; }
+
+        /* --- 2. Layout & Spacing --- */
+        .container { width: 90%; max-width: 1100px; margin: auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+        .text-center { text-align: center; }
+        
+        /* --- 3. Buttons --- */
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px 40px;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+        .btn-gold {
+            background: var(--secondary);
+            color: #000;
+            border-color: var(--secondary);
+        }
+        .btn-gold:hover {
+            background: #ffe033;
+            border-color: #ffe033;
+        }
+        
+        /* --- WHATSAPP ANIMATION & TOOLTIP --- */
+        @keyframes pulse-green {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .float-wa {
+            position: fixed;
+            width: 65px;
+            height: 65px;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-green 2s infinite; 
+        }
+        .float-wa:hover { animation: none; transform: scale(1.1); background-color: #20b85a; }
+
+        .wa-tooltip {
+            position: fixed;
+            bottom: 105px;
+            right: 30px;
+            background: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 10000;
+            border: 1px solid #eee;
+            max-width: 200px;
+            text-align: center;
+        }
+        .wa-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 25px;
+            width: 15px;
+            height: 15px;
+            background: white;
+            transform: rotate(45deg);
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+
+        /* --- 4. Header & Nav --- */
+        .top-bar {
+            background: #111;
+            color: white;
+            padding: 12px 0;
+            font-size: 0.85rem;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+        .logo span { color: #000; font-weight: 400; }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--text-dark); font-weight: 600; font-size: 1rem; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .call-highlight {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .mobile-only { display: none; }
+
+        /* --- 5. Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url('1000016801.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0 120px;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary);
+        }
+
+        .hero h1 { 
+            font-size: 4rem; 
+            margin-bottom: 20px; 
+            color: var(--primary);
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        
+        .hero p { 
+            font-size: 1.5rem; 
+            margin-bottom: 40px; 
+            max-width: 800px; 
+            margin-left: auto; 
+            margin-right: auto;
+            color: #444;
+            font-weight: 600;
+        }
+
+        /* Hero Buttons Container */
+        .hero-btns {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .hero-badge.gold {
+            background: var(--secondary);
+            color: #000;
+        }
+
+        /* --- 6. Info Strip --- */
+        .info-strip {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0;
+        }
+        .info-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            text-align: center;
+        }
+        .info-item { flex: 1; min-width: 250px; }
+        .info-item h3 { color: var(--secondary); font-size: 1.4rem; margin-bottom: 5px; }
+        .info-item p { color: white; opacity: 0.9; }
+
+        /* --- 7. ABOUT SECTION & TYPEWRITER --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-img-box img {
+            border-radius: 5px;
+            box-shadow: 20px 20px 0 var(--primary);
+        }
+
+        /* 25 Years Header Style */
+        .about-intro-head {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900; /* Matching the typewriter bold */
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        /* Multi-Line Typewriter Styles */
+        .typewriter-container {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Big, responsive font */
+            line-height: 1.3;
+            min-height: 220px; /* Reserve height for 3 lines */
+            display: flex;
+            flex-direction: column; /* Stack words vertically */
+            justify-content: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .type-line {
+            display: block;
+            height: 1.4em; /* Reserve height for each line */
+        }
+
+        .line-1 { color: var(--primary); }
+        .line-2 { color: #222; } /* Static Place Color */
+        .line-3 { color: var(--gold-text); } /* Result Color */
+        
+        .cursor {
+            display: inline-block;
+            background-color: var(--secondary);
+            width: 4px;
+            height: 0.9em;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: baseline;
+        }
+        
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* --- 8. Services --- */
+        .service-card {
+            background: white;
+            border: 1px solid #eee;
+            border-bottom: 4px solid var(--primary);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+        }
+        .service-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: var(--shadow);
+            border-bottom-color: var(--secondary);
+        }
+        .service-img {
+            height: 250px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .service-content { padding: 40px 30px; flex: 1; }
+        .license-tag {
+            background: #e8f5e9;
+            color: var(--primary);
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        /* Rubbish / Skip Comparison Style */
+        .skip-box {
+            grid-column: 1 / -1; 
+            background: white;
+            border: 1px solid #eee;
+            border-bottom: 4px solid var(--primary); 
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .skip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .skip-point {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .skip-point strong { color: var(--primary); display: block; margin-bottom: 10px; font-size: 1.1rem; }
+
+        /* --- 9. Contact & Social Grid --- */
+        .contact-section {
+            background: #f4f4f4;
+            text-align: center;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: var(--text-dark);
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 1px solid #ddd;
+        }
+        .contact-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .contact-btn svg { width: 30px; height: 30px; margin-right: 15px; }
+
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        .social-links a {
+            color: #999;
+            transition: 0.3s;
+        }
+        .social-links a:hover { color: var(--white); }
+        .social-links svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* --- 10. License Box --- */
+        .trust-box {
+            background: var(--off-white);
+            border: 2px solid var(--primary);
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- 11. Footer --- */
+        footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 80px 0 40px;
+        }
+        footer h3 { color: white; margin-bottom: 25px; }
+        footer a { color: #999; }
+        footer a:hover { color: var(--secondary); }
+
+        /* --- MOBILE TWEAKS --- */
+        @media (max-width: 768px) {
+            .hero h1 { 
+                font-size: 2.8rem;
+            }
+            .hero p { 
+                font-size: 1.1rem; 
+                padding: 0 10px;
+            }
+            .nav-links { display: none; }
+            .logo { font-size: 1.6rem; }
+            .mobile-only { display: inline-block; }
+            .about-grid { grid-template-columns: 1fr; }
+            .wa-tooltip { display: none; }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 280px; 
+            }
+
+            .info-grid {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .typewriter-container {
+                align-items: center; /* Center align on mobile */
+                text-align: center;
+                font-size: 1.6rem; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating WhatsApp Button with Tooltip -->
+    <div class="wa-tooltip">Send us a photo for a quick quote!</div>
+    
+    <a href="https://wa.me/447950793026?text=Hi%20GDVANS,%20I'm%20interested%20in%20a%20quote..." class="float-wa" target="_blank" aria-label="Chat on WhatsApp">
+        <!-- WhatsApp SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.506-.669-.516-.173-.009-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+    </a>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            Open 7 Days a Week • Licensed Waste Carrier: CBDU514958
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">GDVANS<span>.COM</span></a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#license">License</a>
+                <a href="#contact">Contact</a>
+                <span class="call-highlight">07950 793026</span>
+            </div>
+            <!-- Mobile Call Button -->
+            <a href="tel:07950793026" class="btn btn-gold mobile-only" style="padding: 10px 20px;">Call Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="hero">
+        <div class="container">
+            <div class="badge-container">
+                <span class="hero-badge gold">★ Celebrating 25 Years ★</span>
+                <span class="hero-badge">Open 7 Days a Week</span>
+            </div>
+            
+            <h1>Luton's Reliable<br>Man & Van</h1>
+            <p>From single items to full house clearances. We turn up on time, every time.</p>
+            
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-gold">Get a Free Quote</a>
+                <a href="#services" class="btn" style="background:white; color:var(--primary);">View Services</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Info Strip -->
+    <section class="info-strip">
+        <div class="container info-grid">
+            <div class="info-item">
+                <h3>🗓️ Open 7 Days</h3>
+                <p>Weekend moves? No problem.<br>We work Saturdays & Sundays.</p>
+            </div>
+            <div class="info-item">
+                <h3>📍 Areas Covered</h3>
+                <p>Luton, Dunstable &<br>All Bedfordshire.</p>
+            </div>
+            <div class="info-item">
+                <h3>♻️ Licensed Carrier</h3>
+                <p>License No: CBDU514958<br>Legal, responsible disposal.</p>
+            </div>
+            <div class="info-item">
+                <h3>🤝 25 Years</h3>
+                <p>Established 2001.<br>Family run and trusted.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section-padding" style="background: white;">
+        <div class="container about-grid">
+            <div class="about-img-box">
+                <!-- Using one of your provided photos -->
+                <img src="1000016803.jpg" alt="GDVANS Team">
+            </div>
+            <div>
+                <h4 style="color: var(--secondary); margin-bottom: 10px;">ESTABLISHED 2001</h4>
+                
+                <h2 class="about-intro-head">25 Years of...</h2>
+                
+                <!-- NEW 3-LINE TYPEWRITER CONTAINER -->
+                <div class="typewriter-container">
+                    <span id="line-1" class="type-line line-1"></span>
+                    <span id="line-2" class="type-line line-2"></span>
+                    <span id="line-3" class="type-line line-3"></span>
+                </div>
+
+                <p style="margin-top: 10px; font-size: 1.1rem; color: #555;">When you call GDVANS, you aren't getting a random driver from an app. You are getting a family-run business that has built a reputation in Bedfordshire for over two decades.</p>
+                <p style="margin-top: 15px; font-size: 1.1rem; color: #555;">We know the local roads, we know the recycling centers, and we know how to handle your furniture with respect. Whether it's a antique cabinet or a pile of garden waste, we get the job done right.</p>
+                <div style="margin-top: 30px;">
+                     <a href="#contact" class="btn">Get a Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 60px;">
+                <h4 style="color: #666; letter-spacing: 2px; text-transform: uppercase;">What We Do</h4>
+                <h2 style="font-size: 2.5rem;">Professional Services</h2>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
+                
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <!-- Updated with uploaded filename -->
+                    <div class="service-img" style="background-image: url('1000016799.jpg');"></div>
+                    <div class="service-content">
+                        <span class="license-tag">LICENSED DISPOSAL</span>
+                        <h3>House Clearance</h3>
+                        <p>Don't risk a fine with unlicensed movers. We provide full paperwork for all waste removed.</p>
+                        <ul style="margin-top: 20px; list-style: none;">
+                            <li>✓ Full Property Clear-outs</li>
+                            <li>✓ Furniture Disposal</li>
+                            <li>✓ Rubbish Clearance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <!-- Updated with uploaded filename (Van Side) -->
+                    <div class="service-img" style="background-image: url('1000016798.jpg');"></div>
+                    <div class="service-content">
+                        <span class="license-tag">AVAILABLE WEEKENDS</span>
+                        <h3>Man & Van Removals</h3>
+                        <p>Need to move on a Sunday? We accommodate your schedule, not the other way around.</p>
+                        <ul style="margin-top: 20px; list-style: none;">
+                            <li>✓ Student Moves</li>
+                            <li>✓ Flat & Office Moves</li>
+                            <li>✓ Single Item Transport</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <!-- Updated with uploaded filename (Inside Van) -->
+                    <div class="service-img" style="background-image: url('1000016800.jpg');"></div>
+                    <div class="service-content">
+                        <span class="license-tag">HEAVY LIFTING</span>
+                        <h3>Store Collections</h3>
+                        <p>We collect from IKEA, B&Q, eBay, and Facebook Marketplace. Save your car interior.</p>
+                        <ul style="margin-top: 20px; list-style: none;">
+                            <li>✓ Van & Driver Hire</li>
+                            <li>✓ Delivered to Room of Choice</li>
+                            <li>✓ Assembly Options</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Rubbish Removal / Skip Alternative Block -->
+            <div class="skip-box">
+                <h3 style="color: var(--primary); font-size: 1.8rem;">🗑️ Cheaper & Faster than a Skip</h3>
+                <p style="font-size: 1.1rem; max-width: 800px; margin: 10px auto; color: #555;">Don't pay for expensive council permits or do the heavy lifting yourself. Our rubbish removal service is the smart, legal alternative.</p>
+                
+                <div class="skip-grid">
+                    <div class="skip-point">
+                        <strong>❌ Skip Hire</strong>
+                        May require Council Permit<br>
+                        You do all the loading<br>
+                        Sits outside house for days
+                    </div>
+                    <div class="skip-point" style="border: 2px solid var(--primary); background: white;">
+                        <strong style="font-size: 1.2rem;">✅ GDVANS Service</strong>
+                        <span style="color: green; font-weight: bold;">NO PERMIT NEEDED</span><br>
+                        We load everything for you<br>
+                        Gone in 30 minutes<br>
+                        <strong>100% Legal Disposal (with paperwork)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- License Widget Section -->
+            <div id="license" class="trust-box">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">🛡️ Official License Check</h3>
+                <p style="margin-bottom: 20px; max-width: 600px;">
+                    <strong>We are transparent.</strong> You can verify our live status directly with the Environment Agency below.
+                </p>
+                <iframe style="border: 1px solid #dddddd; overflow: hidden; border-radius: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" width="330" height="187" src="https://environment.data.gov.uk/public-register/waste-carriers-brokers/widget/CBDU514958" title="Widget for CBDU514958"></iframe>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                    Upper Tier Carrier Dealer: CBDU514958
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section-padding contact-section">
+        <div class="container">
+            <h2 style="margin-bottom: 10px;">Get a Quote Today</h2>
+            <p>Send us a photo of what needs moving on WhatsApp for an instant price!</p>
+            
+            <div class="contact-grid">
+                <!-- Call Button -->
+                <a href="tel:07950793026" class="contact-btn">
+                    <svg viewBox="0 0 24 24" fill="var(--primary)"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.49-5.41-4.07-6.89-6.89l1.97-1.57c.3-.29.4-.72.24-1.13-.37-1.1-0.56-2.29-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                    Call 07950 793026
+                </a>
+                
+                <!-- Text Button -->
+                <a href="sms:07950793026?body=Hi%20GDVANS,%20I'd%20like%20a%20quote%20for..." class="contact-btn">
+                    <svg viewBox="0 0 24 24" fill="var(--primary)"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+                    Text Message (SMS)
+                </a>
+
+                <!-- WhatsApp Button -->
+                <a href="https://wa.me/447950793026?text=Hi%20GDVANS,%20I%20need%20a%20quote" class="contact-btn" style="border-color: #25D366; color: #006400;">
+                    <svg viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/></svg>
+                    WhatsApp Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px;">
+                <div>
+                    <h3 style="color:white; font-size: 1.8rem;">GDVANS<span style="color:var(--primary)">.COM</span></h3>
+                    <p>Luton's trusted Man & Van service.</p>
+                    <p style="margin-top: 15px; color: white; font-size: 1.2rem;">📞 07950 793026</p>
+                    
+                    <!-- Social Icons -->
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100063470771984" target="_blank" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.17 6 13 6c.87 0 1.72.04 1.72.04v1.91h-1.33c-.95 0-1.29.59-1.29 1.18V12h2.29l-.3 3h-1.99v6.8C18.56 20.87 22 16.84 22 12z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/gdmanandvanluton" target="_blank" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <ul style="line-height: 2;">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Man & Van</a></li>
+                        <li><a href="#license">License Check</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Opening Hours</h3>
+                    <ul style="line-height: 2;">
+                        <li>Mon - Fri: 07:00 - 21:00</li>
+                        <li>Saturday: 08:00 - 18:00</li>
+                        <li>Sunday: 09:00 - 16:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 60px; border-top: 1px solid #333; padding-top: 30px; font-size: 0.8rem;">
+                &copy; 2026 GDVANS.COM. All rights reserved. <br>
+                Licensed Waste Carrier CBDU514958
+            </div>
+        </div>
+    </footer>
+
+    <!-- Typewriter Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = [
+                { l1: "KEEPING", l2: "LUTON", l3: "MOVING" },
+                { l1: "SERVING", l2: "DUNSTABLE", l3: "DAILY" },
+                { l1: "HELPING", l2: "BEDFORD", l3: "RELOCATE" },
+                { l1: "CLEARING", l2: "LEIGHTON BUZZARD", l3: "HOMES" },
+                { l1: "MOVING", l2: "BIGGLESWADE", l3: "FAMILIES" },
+                { l1: "WORKING IN", l2: "HOUGHTON REGIS", l3: "7 DAYS A WEEK" },
+                { l1: "COVERING", l2: "FLITWICK", l3: "AND AMPTHILL" },
+                { l1: "TRUSTED IN", l2: "SANDY", l3: "SINCE 2001" },
+                { l1: "YOUR LOCAL", l2: "SHEFFORD", l3: "MOVERS" },
+                { l1: "BASED NEAR", l2: "TODDINGTON", l3: "M1 CORRIDOR" }
+            ];
+            
+            const els = [
+                document.getElementById('line-1'),
+                document.getElementById('line-2'),
+                document.getElementById('line-3')
+            ];
+            
+            let dataIndex = 0; // Which object in data
+            let lineIndex = 0; // 0, 1, or 2 (which line we are typing)
+            let charIndex = 0; // Which char in the current line string
+            let isDeleting = false;
+            let isWaiting = false;
+
+            function type() {
+                const currentObj = data[dataIndex];
+                // Map lineIndex 0->l1, 1->l2, 2->l3
+                const key = lineIndex === 0 ? 'l1' : (lineIndex === 1 ? 'l2' : 'l3');
+                const textStr = currentObj[key];
+                
+                const currentEl = els[lineIndex];
+
+                if (isDeleting) {
+                    // DELETING LOGIC: Remove chars from line 3, then 2, then 1
+                    if (charIndex > 0) {
+                        currentEl.textContent = textStr.substring(0, charIndex - 1);
+                        charIndex--;
+                        setTimeout(type, 30); // Fast delete
+                    } else {
+                        // Finished deleting this line
+                        currentEl.innerHTML = ''; // Ensure clear
+                        if (lineIndex > 0) {
+                            // Move up to previous line
+                            lineIndex--;
+                            const prevKey = lineIndex === 0 ? 'l1' : 'l2';
+                            charIndex = currentObj[prevKey].length; // Start at end of prev line
+                            setTimeout(type, 30);
+                        } else {
+                            // All deleted. Move to next phrase.
+                            isDeleting = false;
+                            dataIndex = (dataIndex + 1) % data.length;
+                            lineIndex = 0;
+                            charIndex = 0;
+                            setTimeout(type, 500); // Pause before new typing
+                        }
+                    }
+                } else {
+                    // TYPING LOGIC: Type line 1, then 2, then 3
+                    if (charIndex < textStr.length) {
+                        // Add cursor only to active line
+                        currentEl.innerHTML = textStr.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+                        // Remove cursor from previous line if exists
+                        if (lineIndex > 0) {
+                             els[lineIndex-1].innerHTML = data[dataIndex][lineIndex===1?'l1':'l2'];
+                        }
+                        
+                        charIndex++;
+                        setTimeout(type, 80); // Typing speed
+                    } else {
+                        // Finished this line
+                        // Remove cursor from this line (it will jump to next, or wait)
+                        currentEl.innerHTML = textStr; 
+                        
+                        if (lineIndex < 2) {
+                            // Move to next line
+                            lineIndex++;
+                            charIndex = 0;
+                            setTimeout(type, 200); // Pause between lines
+                        } else {
+                            // Finished all 3 lines
+                            // Add cursor back to end of last line to blink while waiting
+                            currentEl.innerHTML = textStr + '<span class="cursor"></span>';
+                            
+                            isWaiting = true;
+                            setTimeout(() => {
+                                isDeleting = true;
+                                isWaiting = false;
+                                charIndex = textStr.length; // Start deleting from end of line 3
+                                type();
+                            }, 1000); // Reduced pause to 1 second
+                        }
+                    }
+                }
+            }
+
+            // Start
+            setTimeout(type, 1000);
+        });
+    </script>
+
+</body>
+</html>
