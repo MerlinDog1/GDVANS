@@ -866,9 +866,9 @@
 
             // --- 2. Typewriter Logic (Static 1 & 2, Dynamic 3) ---
             const phrases = [
-                "MOVING", "DUNSTABLE", "BEDFORD", "RELOCATING", 
-                "THE M1 CORRIDOR", "HOUGHTON REGIS", "FLITWICK", 
-                "SANDY", "SHEFFORD", "TODDINGTON", "BIGGLESWADE"
+                "DUNSTABLE", "BEDFORD", "LEIGHTON BUZZARD", "BIGGLESWADE", 
+                "HOUGHTON REGIS", "FLITWICK", "SANDY", "SHEFFORD", 
+                "TODDINGTON", "THE M1 CORRIDOR"
             ];
             
             const typeTarget = document.getElementById('typewriter-text');
@@ -895,7 +895,7 @@
                     phraseIndex = (phraseIndex + 1) % phrases.length;
                     setTimeout(type, 500); // Pause before next
                 } else {
-                    setTimeout(type, isDeleting ? 40 : 80);
+                    setTimeout(type, isDeleting ? 30 : 80);
                 }
             }
 
