@@ -399,10 +399,22 @@
             background-size: cover;
             background-position: center;
         }
+        /* The 'Before' div acts as a clipping mask */
         .slider-before {
             z-index: 2;
             width: 50%;
+            overflow: hidden;
             border-right: 3px solid var(--secondary);
+        }
+        /* This inner div stays fixed size so the image doesn't shift */
+        .slider-before-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            /* width will be set via JS to match the container width */
         }
         .slider-after {
             z-index: 1;
@@ -698,7 +710,9 @@
                 <div class="service-card">
                     <div class="slider-container" id="clearanceSlider">
                         <div class="slider-img slider-after" style="background-image: url('house-clearance-after-luton.png');"></div>
-                        <div class="slider-img slider-before" style="background-image: url('house-clearance-before-luton.jpg');"></div>
+                        <div class="slider-before">
+                             <div class="slider-before-inner" style="background-image: url('house-clearance-before-luton.jpg');"></div>
+                        </div>
                         <div class="slider-handle"></div>
                     </div>
                     <div class="service-content">
@@ -961,8 +975,14 @@
 
             // --- 3. Comparison Slider Logic ---
             const slider = document.getElementById('clearanceSlider');
-            const beforeImg = slider.querySelector('.slider-before');
+            const beforeMask = slider.querySelector('.slider-before');
+            const beforeInner = slider.querySelector('.slider-before-inner');
             const handle = slider.querySelector('.slider-handle');
+
+            function syncSize() {
+                // Ensure the 'before' image matches the slider width exactly
+                beforeInner.style.width = slider.offsetWidth + 'px';
+            }
 
             function moveSlider(e) {
                 const rect = slider.getBoundingClientRect();
@@ -974,9 +994,12 @@
                 if (x > rect.width) x = rect.width;
                 
                 const percent = (x / rect.width) * 100;
-                beforeImg.style.width = `${percent}%`;
+                beforeMask.style.width = `${percent}%`;
                 handle.style.left = `${percent}%`;
             }
+
+            window.addEventListener('resize', syncSize);
+            syncSize();
 
             slider.addEventListener('mousemove', moveSlider);
             slider.addEventListener('touchmove', moveSlider);
