@@ -220,12 +220,14 @@
 
         /* --- 5. Hero Section --- */
         .hero {
-            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url('gd-vans-desktop-hero.png');
+            background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5)), url('gd-vans-desktop-hero.png');
             background-size: cover;
             background-position: center;
             padding: 100px 0 120px;
             text-align: center;
             border-bottom: 5px solid var(--secondary);
+            /* Fallback color if image fails */
+            background-color: #f0f0f0;
         }
 
         .hero h1 { 
@@ -234,6 +236,8 @@
             color: var(--primary);
             text-transform: uppercase;
             line-height: 1.1;
+            /* Added text shadow to ensure reading against image */
+            text-shadow: 0px 0px 20px rgba(255,255,255,0.8);
         }
         
         .hero p { 
@@ -242,8 +246,9 @@
             max-width: 800px; 
             margin-left: auto; 
             margin-right: auto;
-            color: #444;
-            font-weight: 600;
+            color: #222; /* Darker for contrast */
+            font-weight: 700;
+            text-shadow: 0px 0px 10px rgba(255,255,255,0.8);
         }
 
         /* Hero Buttons Container */
