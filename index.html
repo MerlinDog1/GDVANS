@@ -385,10 +385,11 @@
         .slider-container {
             position: relative;
             width: 100%;
-            height: 250px;
+            height: 350px; /* Increased height for better visibility */
             overflow: hidden;
             border-radius: 8px 8px 0 0;
             cursor: ew-resize;
+            background-color: #333;
         }
         .slider-img {
             position: absolute;
@@ -401,20 +402,24 @@
         }
         /* The 'Before' div acts as a clipping mask */
         .slider-before {
+            position: absolute;
+            top: 0;
+            left: 0;
             z-index: 2;
             width: 50%;
+            height: 100%;
             overflow: hidden;
             border-right: 3px solid var(--secondary);
         }
-        /* This inner div stays fixed size so the image doesn't shift */
+        /* Fixed size inner div prevents image shifting */
         .slider-before-inner {
             position: absolute;
             top: 0;
             left: 0;
             height: 100%;
+            /* Width set by JS to match container */
             background-size: cover;
             background-position: center;
-            /* width will be set via JS to match the container width */
         }
         .slider-after {
             z-index: 1;
@@ -980,16 +985,18 @@
             const handle = slider.querySelector('.slider-handle');
 
             function syncSize() {
-                // Ensure the 'before' image matches the slider width exactly
-                beforeInner.style.width = slider.offsetWidth + 'px';
+                // Force the inner image to be the EXACT width of the container
+                // so it doesn't compress when the mask shrinks.
+                const containerWidth = slider.offsetWidth;
+                beforeInner.style.width = containerWidth + 'px';
             }
 
             function moveSlider(e) {
                 const rect = slider.getBoundingClientRect();
-                const xPos = e.pageX || (e.touches && e.touches[0].pageX);
+                const xPos = (e.pageX || (e.touches && e.touches[0].pageX)) - window.scrollX;
                 if (!xPos) return;
                 
-                let x = xPos - rect.left - window.scrollX;
+                let x = xPos - rect.left;
                 if (x < 0) x = 0;
                 if (x > rect.width) x = rect.width;
                 
@@ -998,11 +1005,16 @@
                 handle.style.left = `${percent}%`;
             }
 
+            // Sync on load and resize
+            window.addEventListener('load', syncSize);
             window.addEventListener('resize', syncSize);
             syncSize();
 
             slider.addEventListener('mousemove', moveSlider);
             slider.addEventListener('touchmove', moveSlider);
+            
+            // Initial call to ensure alignment
+            setTimeout(syncSize, 500);
         });
     </script>
 
